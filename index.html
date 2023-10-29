@@ -13,17 +13,24 @@ let w = document.body.clientWidth -b
 let h = document.body.clientHeight -b
 c.canvas.width = w +b
 c.canvas.height = h +b
-
 let rct = 5  // how many rectangles
-let [rctW,rctH, b2, draw] = [w/rct, h/rct, b/2, true]
+
+function rnd(){
+   return Math.floor(Math.random() * rct);
+}
+
+const board = Array(rct).fill().map(() => Array(rct).fill(''))
+board[rnd()][0] = '🦹'
+board[rnd()][4] = '🦸'
+
+let [rctW,rctH, b2] = [w/rct, h/rct, b/2]
 c.beginPath()
 for (let x = 0; x < b; x++) {
     for (let y = 0; y < b; y++) {
         c.rect(x*rctW+b2, y*rctH+b2, rctW, rctH)
-        if (draw){
+        if (board[x][y] != ''){
             c.font = rctW/4 + "px Arial"
-            c.fillText("👨", x+rctW/3, y+(rctH*6/10))
-            draw = false
+            c.fillText(board[x][y], x*rctW+rctW/3, y*rctH+rctH*6/10)
         }
     }
 }
