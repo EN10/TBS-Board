@@ -4,23 +4,28 @@ body {
     padding: 0;
 }
 </style>
+
 <canvas id='c'></canvas>
 <script>
 let c = document.getElementById('c').getContext('2d')
-let b = 5 // boarder
+let b = 5   // boarder size, b2 is half
 let w = document.body.clientWidth -b
 let h = document.body.clientHeight -b
 c.canvas.width = w +b
 c.canvas.height = h +b
 
-let [x,y,sq] = [b/2,b/2,5]
-
+let rct = 5  // how many rectangles
+let [rctW,rctH, b2, draw] = [w/rct, h/rct, b/2, true]
 c.beginPath()
-for (let x = b/2; x < w; x+=w/sq) {
-    for (let y = b/2; y < h; y+=h/sq) {
-        c.rect(x, y, w/sq, h/sq)
+for (let x = 0; x < b; x++) {
+    for (let y = 0; y < b; y++) {
+        c.rect(x*rctW+b2, y*rctH+b2, rctW, rctH)
+        if (draw){
+            c.font = rctW/4 + "px Arial"
+            c.fillText("👨", x+rctW/3, y+(rctH*6/10))
+            draw = false
+        }
     }
 }
-c.stroke();
-
+c.stroke()
 </script>
