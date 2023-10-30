@@ -18,8 +18,11 @@ let rct = 5  // how many rectangles
 function rnd(){
    return Math.floor(Math.random() * rct);
 }
-
+    
+// create 2d array filled with '' 
 const board = Array(rct).fill().map(() => Array(rct).fill(''))
+    
+// add players to array
 board[rnd()][0] = '🦹'
 board[rnd()][4] = '🦸'
 
@@ -33,10 +36,13 @@ function placeRND(sym){
         board[x][y] = sym
     }
 }
+    
+// add trees to array
 for (let i=0; i < 5; i++) {
     placeRND('🌳')
 }
 
+// draw board
 let [rctW,rctH, b2] = [w/rct, h/rct, b/2]
 c.beginPath()
 for (let x=0; x < b; x++) {
