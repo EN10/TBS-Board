@@ -23,10 +23,24 @@ const board = Array(rct).fill().map(() => Array(rct).fill(''))
 board[rnd()][0] = '🦹'
 board[rnd()][4] = '🦸'
 
+function placeRND(sym){
+    let x = rnd()
+    let y = rnd()
+    if (board[x][y] != ''){
+        placeRND(sym)
+    }
+    else{
+        board[x][y] = sym
+    }
+}
+for (let i=0; i < 5; i++) {
+    placeRND('🌳')
+}
+
 let [rctW,rctH, b2] = [w/rct, h/rct, b/2]
 c.beginPath()
-for (let x = 0; x < b; x++) {
-    for (let y = 0; y < b; y++) {
+for (let x=0; x < b; x++) {
+    for (let y=0; y < b; y++) {
         c.rect(x*rctW+b2, y*rctH+b2, rctW, rctH)
         if (board[x][y] != ''){
             c.font = rctW/4 + "px Arial"
