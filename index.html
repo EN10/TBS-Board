@@ -13,7 +13,7 @@ let w = document.body.clientWidth -b
 let h = document.body.clientHeight -b
 c.canvas.width = w +b
 c.canvas.height = h +b
-let rct = 5  // how many rectangles
+let rct = 2  // how many rectangles
 
 function rnd(){
    return Math.floor(Math.random() * rct);
@@ -23,8 +23,8 @@ function rnd(){
 const board = Array(rct).fill().map(() => Array(rct).fill(''))
     
 // add players to array
-board[rnd()][0] = '🦹'
-board[rnd()][4] = '🦸'
+board[rnd()][0]     = '🦹'
+board[rnd()][rct-1] = '🦸'
 
 function placeRND(sym){
     let x = rnd()
@@ -38,15 +38,15 @@ function placeRND(sym){
 }
     
 // add trees to array
-for (let i=0; i < 5; i++) {
+for (let i=0; i < rct; i++) {
     placeRND('🌳')
 }
 
 // draw board
 let [rctW,rctH, b2] = [w/rct, h/rct, b/2]
 c.beginPath()
-for (let x=0; x < b; x++) {
-    for (let y=0; y < b; y++) {
+for (let x=0; x < rct; x++) {
+    for (let y=0; y < rct; y++) {
         c.rect(x*rctW+b2, y*rctH+b2, rctW, rctH)
         if (board[x][y] != ''){
             c.font = rctW/4 + "px Arial"
